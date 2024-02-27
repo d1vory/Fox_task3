@@ -21,8 +21,6 @@ class Program
 
             Console.WriteLine($"Line with maximal sum of elements is {parser.GetLineWithMaximumSum()}");
 
-            var brokenLinesIndexes = parser.GetBrokenLinesIndexes();
-
             Console.Write("Broken lines are: [");
             foreach (int i in parser.GetBrokenLinesIndexes())
             {

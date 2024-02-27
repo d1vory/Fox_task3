@@ -26,7 +26,6 @@ public class Line
     private void ParseLine(string line)
     {
         var numbersList = new List<decimal>();
-        NumberFormatInfo nfi = new CultureInfo( "en-US", false ).NumberFormat;
         var culture = new CultureInfo("en-US", false);
         var style = NumberStyles.Number;
         
