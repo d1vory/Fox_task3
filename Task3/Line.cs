@@ -16,6 +16,10 @@ public class Line
 
     public decimal GetSum()
     {
+        if (IsBroken)
+        {
+            throw new InvalidOperationException("Cant get a sum of a broken line!");
+        }
         return NumbersSet.Sum();
     }
 

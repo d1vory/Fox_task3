@@ -18,16 +18,18 @@ public class FileParser
         var maxSum = decimal.MinValue; 
         foreach (var line in Lines)
         {
-            if (line.IsBroken)
+            try
+            {
+                var lineSum = line.GetSum();
+                if (lineSum > maxSum)
+                {
+                    maxSum = lineSum;
+                    maxSumLineIndex = line.Index;
+                }
+            }
+            catch (InvalidOperationException e)
             {
                 continue;
-            }
-
-            decimal lineSum = line.GetSum();
-            if (lineSum > maxSum)
-            {
-                maxSum = lineSum;
-                maxSumLineIndex = line.Index;
             }
         }
 

@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        const string filename = "/Users/olexandr/DEV/Csharp/foxminded/Task3/Task3/files/numbers.txt";
+        const string filename = @"C:\Users\Olexandr\MyProjects\CSHARP\foxminded\task3\Task3\files\numbers.txt";
         var parser = new FileParser(filename);
         Console.WriteLine($"Max sum line is {parser.GetLineWithMaximumSum()}");
 
