@@ -4,9 +4,9 @@ namespace Task3;
 
 public class Line
 {
-    public bool IsBroken = false;
-    private decimal[] NumbersSet;
-    public readonly int Index;
+    public bool IsBroken { get; private set; }
+    private decimal[] _numbersSet;
+    public int Index { get; private set; }
 
     public Line(string line, int index)
     {
@@ -20,7 +20,7 @@ public class Line
         {
             throw new InvalidOperationException("Cant get a sum of a broken line!");
         }
-        return NumbersSet.Sum();
+        return _numbersSet.Sum();
     }
 
     private void ParseLine(string line)
@@ -43,8 +43,6 @@ public class Line
             }
         }
 
-        NumbersSet = numbersList.ToArray();
+        _numbersSet = numbersList.ToArray();
     }
-
-
 }

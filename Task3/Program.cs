@@ -19,7 +19,7 @@ class Program
         {
             var parser = new FileParser(filename);
 
-            Console.WriteLine($"Line with maximal sum of elements is {parser.GetLineWithMaximumSum()}");
+            Console.WriteLine($"Line with maximal sum of elements is {parser.LineWithMaximumSum}");
 
             Console.Write("Broken lines are: [");
             foreach (int i in parser.GetBrokenLinesIndexes())
@@ -34,6 +34,5 @@ class Program
             Console.WriteLine("Given path is not valid!");
             return;
         }
-
     }
 }

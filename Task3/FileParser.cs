@@ -2,29 +2,45 @@ namespace Task3;
 
 public class FileParser
 {
-    private string Filename;
-    private Line[] Lines;
+    private string _filename;
+    private Line[] _lines;
+    public int LineWithMaximumSum { get; set; }
+    
 
     public FileParser(string filename)
     {
-        Filename = filename;
+        _filename = filename;
         ParseFile();
     }
-
     
-    public  int GetLineWithMaximumSum()
+    public int[] GetBrokenLinesIndexes()
     {
-        var maxSumLineIndex = -1;
+        var lineIndexes = from line in _lines
+            where line.IsBroken
+            select line.Index;
+        return lineIndexes.ToArray();
+    }
+    
+    private void ParseFile()
+    {
+        var fileLines =  File.ReadLines(_filename);
+        _lines = new Line[fileLines.Count()];
+        int i = 0;
+        LineWithMaximumSum = -1;
         var maxSum = decimal.MinValue; 
-        foreach (var line in Lines)
+        
+        foreach (var lineStr in fileLines)
         {
+            var line = new Line(lineStr, i + 1);
+            _lines[i] = line;
+            i++;
             try
             {
                 var lineSum = line.GetSum();
                 if (lineSum > maxSum)
                 {
                     maxSum = lineSum;
-                    maxSumLineIndex = line.Index;
+                    LineWithMaximumSum = line.Index;
                 }
             }
             catch (InvalidOperationException e)
@@ -32,35 +48,5 @@ public class FileParser
                 continue;
             }
         }
-
-        return maxSumLineIndex;
     }
-
-    public int[] GetBrokenLinesIndexes()
-    {
-        var lineIndexes = new List<int>();
-        foreach (var line in Lines)
-        {
-            if (line.IsBroken)
-            {
-                lineIndexes.Add(line.Index);
-            }
-        }
-
-        return lineIndexes.ToArray();
-    }
-    
-    private void ParseFile()
-    {
-        var fileLines =  File.ReadLines(Filename);
-        Lines = new Line[fileLines.Count()];
-        int i = 0;
-        
-        foreach (var lineStr in fileLines)
-        {
-            Lines[i] = new Line(lineStr, i + 1);
-            i++;
-        }
-    }
-    
 }
